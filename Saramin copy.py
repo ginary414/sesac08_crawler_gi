@@ -1,20 +1,17 @@
-import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import re   #정규표현식
-import html
-
+from html import unescape
 
 
 def clean_text(text):
     #빈 텍스트를 넣어 clean_text 실행했다면
-    if hasattr(text, 'get_text'):
-         text = text.get_text()
+    if not text:
+        return " "
     
     #text가 있다면 (빈 값이 아니라면 ) 정제
-    text = html.unescape(str(text))
-
+    text = unescape(text)
 
     #re(정규표현식) : 텍스트를 특정한 패턴으로 찾아서, 변형
     #text = re.sub(패턴, 바꿀 문자, 문장) -> 문장에서 '패턴'을 찾아서 '바꿀문자'로 변형
